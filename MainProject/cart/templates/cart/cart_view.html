@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load total %}
+{% block content %}
+<div class="cart-container">
+    <h1>Your Shopping Cart</h1>
+    
+    {% if not cart %}
+        <p>Your cart is empty. Please add some products to your cart.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                    <tr>
+                        <td>{{ item.dish.name }}</td>
+                        <td>₹{{ item.dish.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>₹{{ item.dish.price|multiply:item.quantity }}</td>
+                        <td>
+                            <form method="POST" action="{% url 'remove_item_from_cart' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="cart-summary">
+            <p><strong></strong>{{ cart.total_price }}</p>
+            <a href="{% url 'checkout' %}">Proceed to Checkout</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
