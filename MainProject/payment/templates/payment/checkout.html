@@ -157,7 +157,7 @@ document.getElementById("rzp-button1").onclick = function(e){
                 "name": "vikas goud",
                 "description": "Test Transaction",
                 "image": "https://example.com/your_logo",
-                "order_id": data.payment['id'],
+                "order_id": data.order.id,
                 "callback_url": "http://127.0.0.1:8000/payment/confirm_payment/",
                 "theme": { "color": "#3399cc" }
             };

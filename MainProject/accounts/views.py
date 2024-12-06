@@ -85,7 +85,7 @@ class ForgotPassword(View):
         email = request.POST.get('email')
         if email == user.email:
             otp = random.randint(1000,9999)
-            send_otp=(email,otp)
+            # send_otp(email,otp)
             print('\n\n\n\n',otp,'\n\n\n\n')
             request.session['otp']= int(otp)
             request.session['username']=user.username

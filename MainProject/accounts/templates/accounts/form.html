@@ -9,7 +9,7 @@
 				<div class="col-first">
 					<h1>{{title}}</h1>
 					<nav class="d-flex align-items-center">
-						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="/">Home/<span class="lnr lnr-arrow-right"></span></a>
 						<a href="{% url 'register' %}">Register</a>
 					</nav>
 				</div>
@@ -42,9 +42,6 @@
 								<input type="submit" value="Submit Button" class="primary-btn">
 							</div>
 						</form>
-						{% if title == 'OTP Verify' %}
-  						<button type="button" onclick="window.location.reload();">Resend OTP</button>
-						{% endif %}
 					</div>
 				</div>
 			</div>

@@ -43,6 +43,21 @@
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
+                                <div class="col-3" style="background-color: rgb(14, 13, 13);">
+                                    <li style="font-weight: 900; font-size: 20px; color: aliceblue;">Category</li> 
+                                         <ol>
+                                         {% for cat in category %}
+                                             <li><a href="{% url 'sort_by_category' cat.name %}">{{cat.name}}</a></li>
+                                         {% endfor %}
+                                         </ol>
+                                     <li style="font-weight: 900; font-size: 20px; color: aliceblue;">Price</li>
+                                         <ol>
+                                             <li><a href="{% url 'sort_by_price' '0&100' %}">&lt;100</a></li>
+                                             <li><a href="{% url 'sort_by_price' '100&250' %}">100&lt; and &lt;250</a></li>
+                                             <li><a href="{% url 'sort_by_price' '250&500' %}">250&lt; and &lt;500</a></li>
+                             
+                                         </ol>
+                                 </div>
                                
                                
                                

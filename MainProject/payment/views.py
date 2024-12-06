@@ -34,7 +34,7 @@ def Proceed_to_payment(request):
             shipping_charges = 100
         )
     for item in cart_item:
-        total += item.dish.price * item.quantity
+        #total += item.dish.price * item.quantity
         OrderItem.objects.create(
             order=order,
             dish=item.dish,
@@ -44,13 +44,21 @@ def Proceed_to_payment(request):
     order.total = total
     order.save()
         
-    data = { "amount": int(total), "currency": "INR", "receipt": str(order.order_uuid)}
+    data = { "amount": int(total*100), "currency": "INR", "receipt": str(order.order_uuid)}
     razor_pay_order = client.order.create(data=data)
     context = {
         'order':razor_pay_order,
         'payment':data,
         'RAZORPAY_KEY_ID':RAZORPAY_KEY_ID
     }
+    Payment.objects.create(
+        user = user,
+        razorpay_order_id = razor_pay_order['id'],
+        amount = total,
+        status = "PENDING",
+        method = "RAZORPAY",
+        order = order
+    )
     data = json.dumps(context,indent=4)
     return HttpResponse(data)
 
